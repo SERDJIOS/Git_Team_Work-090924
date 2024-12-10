@@ -13,5 +13,13 @@ read -p "Write file extension: " file_extension
 # Проверка существования целевой директории
 
 # Проверка, есть ли файлы с указанным расширением в исходной директории
+files=$(find "$source_directory" -maxdepth 1 -type f -name "*.$file_extension")
 
+if [ -z "$files" ]; then
+  echo "Ошибка: В исходной директории '$source_directory' не найдено файлов с расширением '.$file_extension'."
+  exit 1
+else
+  echo "Файлы с расширением '.$file_extension' найдены:"
+  echo "$files"
+fi
 # Копирование файлов с указанным расширением в целевую директорию
